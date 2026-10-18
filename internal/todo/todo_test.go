@@ -13,7 +13,7 @@ func TestMemoryStore(t *testing.T) {
 	if _, err := s.Create(""); !errors.Is(err, todo.ErrEmptyTitle) {
 		t.Fatalf("want ErrEmptyTitle, got %v", err)
 	}
-	a, _ := s.Create("a")
+	a, _ := s.Create("a"
 	b, _ := s.Create("b")
 	if a.ID != 1 || b.ID != 2 {
 		t.Fatalf("unexpected ids %d %d", a.ID, b.ID)
