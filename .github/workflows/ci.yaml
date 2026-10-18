@@ -13,17 +13,57 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-go@v5
         with:
           go-version-file: go.mod
 
-      - name: Build
-        run: go build ./...
+      - name: gofmt
+        run:  |
+          out=$(gofmt -l .)
+          if [ -n "$out" ]; then
+            echo "These files are not gofmt-ed:"; 
+            echo "$out";
+            exit 1
+          fi
 
-      - name: Test
-        run: make test
+      - name: go vet
+        run: go vet./...
+        
+      - name: go.mod is tidy
+        run: |
+          go mod tidy
+          git diff --exit-code go.mod go.sum
+
+      - uses: golangci/golangci-lint-action@v8
+        with:
+          version: latest
+
+
+
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Test with race detector and coverage
+        run: make cover
+
+      - name: Enforce minimum coverage (50%)
+        run: |
+          total=$(go tool cover -func=coverage.out | awk '/^total:/ {gsub("%","",$3); print $3}')
+          echo "Total coverage: ${total}%"
+          awk -v t="$total" 'BEGIN { exit (t < 50) }' || { echo "Coverage below 50%"; exit 1; }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: coverage.out
