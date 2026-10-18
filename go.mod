@@ -1,4 +1,4 @@
-module github.com/navneetshukl/go-cicd-demo
+module github.com/navneetshukl/go-cicd
 
 go 1.25.1
 

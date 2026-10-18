@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/navneetshukl/go-cicd-demo/internal/server"
-	"github.com/navneetshukl/go-cicd-demo/internal/todo"
+	"github.com/navneetshukl/go-cicd/internal/server"
+	"github.com/navneetshukl/go-cicd/internal/todo"
 )
 
 func do(t *testing.T, method, path, body string) *httptest.ResponseRecorder {

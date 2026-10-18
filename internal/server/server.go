@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/navneetshukl/go-cicd-demo/internal/todo"
+	"github.com/navneetshukl/go-cicd/internal/todo"
 )
 
 var Version = "dev"

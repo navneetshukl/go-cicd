@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/navneetshukl/go-cicd-demo/internal/server"
-	"github.com/navneetshukl/go-cicd-demo/internal/todo"
+	"github.com/navneetshukl/go-cicd/internal/server"
+	"github.com/navneetshukl/go-cicd/internal/todo"
 )
 
 func main() {

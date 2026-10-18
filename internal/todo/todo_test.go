@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/navneetshukl/go-cicd-demo/internal/todo"
+	"github.com/navneetshukl/go-cicd/internal/todo"
 )
 
 func TestMemoryStore(t *testing.T) {
