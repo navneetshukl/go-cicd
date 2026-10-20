@@ -19,8 +19,6 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
-
-	os.Setenv("A","B")
 	srv := &http.Server{
 		Addr:              ":" + port,
 		Handler:           server.New(todo.NewMemoryStore()),
