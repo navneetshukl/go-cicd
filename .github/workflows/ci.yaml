@@ -67,3 +67,11 @@ jobs:
         with:
           name: coverage
           path: coverage.out
+
+  docker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image (no push)
+        run: docker build -t go-cicd-demo:ci .
