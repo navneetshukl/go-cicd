@@ -32,7 +32,7 @@ jobs:
           fi
 
       - name: go vet
-        run: go vet./...
+        run: go vet ./...
         
       - name: go.mod is tidy
         run: |
